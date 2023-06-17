@@ -1,0 +1,138 @@
+
+<div class="outer">
+    <nav class="navbar">
+      <h4>Hello, {{emailaddress}}</h4>
+        <div class="icons">
+          <i (click)="goChat()" class="fa fa-comments icon" aria-hidden="true"></i>
+          <i (click)="logOut()" class="fa fa-sign-out icon" aria-hidden="true"></i>
+        </div>
+      </nav>
+
+<div class="panel">
+    <div class="panel-heading d-flex align-items-center">
+      <h2 class="mr-auto">Your tasks</h2>
+      <div class="add">
+        <button type="submit" (click)="openModel()">
+            <i class="bi bi-plus-square" ></i>
+        </button>
+      </div>
+      
+    </div>
+    <div id="todos-list">
+      <tr *ngFor="let task of taskArr; let i=index">
+        <div class="todo" [id]="i" >
+          <ng-container *ngIf="task.status === 'Planned'">
+            <i class="bi bi-square" (click)="changeStatus(task, 'InProgress')"></i>
+          </ng-container>
+          <ng-container *ngIf="task.status === 'InProgress'">
+            <i class="bi bi-check-square" (click)="changeStatus(task, 'Done')"></i>
+          </ng-container>
+          <ng-container *ngIf="task.status === 'Done'">
+            <i class="bi bi-check-square-fill" (click)="changeStatus(task, 'Planned')"></i>
+          </ng-container>
+          <div class="accordion-item">
+            <h2 class="accordion-header" [id]="'heading-' + i">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse-' + i" aria-expanded="false" [attr.aria-controls]="'collapse-' + i">
+            {{ task.name }}
+          </button>
+          </h2>
+          
+            </div>
+            <div class = "icons">
+              <a class="bi bi-list" data-bs-toggle="collapse" [attr.href]="'#collapse-' + i" role="button" aria-expanded="false" [attr.aria-controls]="'collapse-' + i"></a>
+              <i (click)="fillForm(task)" class="bi bi-pen-fill"></i>
+              <i (click)="delete(task)" class="bi bi-trash3-fill"></i>
+              <i class="bi bi-calendar-event-fill"></i>
+            </div>
+            
+          </div>
+          <div [id]="'collapse-' + i" class="accordion-collapse collapse">
+            <div class="accordion-body">
+                <strong>Description: </strong> {{ task.description }}<br>
+                <strong>Deadline: </strong> {{ task.dueDate | date: 'yyyy-MM-dd' }}
+              </div>
+          </div>
+        </tr>
+      <tr *ngIf="taskArr.length === 0">
+        <td colspan="4"><strong>You have no task!</strong></td>
+      </tr>
+      
+    </div>
+  </div>       
+  </div>
+  <div class="modal" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add new task</h4>
+          <button type="button" class="btn-close" (click)="CloseModel()" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+                <div class="panel-body p-3">
+                    <form  [formGroup]="taskForm">
+                        <div class="form-group pt-3">
+                            <label class="text" for="name_task">Name:</label>
+                            <div class="input-field" >
+                                <input formControlName="name_task" type="text">
+                            </div>
+                        </div>
+                        <small *ngIf="taskForm.controls['name_task'].dirty && taskForm.hasError('required','name_task')" class="text-danger">*Name is required</small>
+                        <div class="form-group pt-3">
+                            <label class="text"  for="description">Description:</label>
+                            <div class="input-field">
+                                <textarea formControlName="description"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group pt-3">
+                            <label class="text" for="creationDate">Deadline:</label>
+                            <div class="input-field">
+                                <input formControlName="date" type="date">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+        </div>
+        <div class="modal-footer">
+            <button (click)="addTask()"  type="submit">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="modal" id="myModal2">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add new task</h4>
+            <button type="button" class="btn-close" (click)="CloseModel2()" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+                  <div class="panel-body p-3">
+                      <form  [formGroup]="taskForm">
+                          <div class="form-group pt-3">
+                              <label class="text" for="name_task">Name:</label>
+                              <div class="input-field" >
+                                  <input formControlName="name_task" type="text">
+                              </div>
+                          </div>
+                          <small *ngIf="taskForm.controls['name_task'].dirty && taskForm.hasError('required','name_task')" class="text-danger">*Name is required</small>
+                          <div class="form-group pt-3">
+                              <label class="text"  for="description">Description:</label>
+                              <div class="input-field">
+                                  <textarea formControlName="description"></textarea>
+                              </div>
+                          </div>
+                          <div class="form-group pt-3">
+                              <label class="text" for="creationDate">Deadline:</label>
+                              <div class="input-field">
+                                  <input formControlName="date" type="date">
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+          </div>
+          <div class="modal-footer">
+              <button (click)="editTask()" type="submit">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>

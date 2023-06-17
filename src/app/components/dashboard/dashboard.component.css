@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Sono:wght@300&display=swap');
+
+.panel-heading{
+  text-align: center;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.panel-heading h2 {
+  margin: 0 0 0 0;
+}
+
+.btn {
+  margin-top: 20px;
+  border-radius: 15px;
+  color: #000000;
+  background: #ddd;
+}
+
+.panel {
+  min-height: auto;
+  width: 80vw;
+  box-shadow: 20px 20px 100px rgb(0, 0, 0);
+  border-radius: 12px;
+  margin: 30px auto;
+}
+
+#todos-list {
+  height: calc(var(--container-height) - var(--header-height));
+  background-color: #fff;
+  padding: 0.5rem;
+  border: 1px solid rgb(219, 219, 219);
+  overflow: scroll;
+  border-radius: 0 0 5px 5px;
+}
+#todos-list .todo {
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.75rem 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #297baa;
+}
+#todos-list .todo:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+#todos-list .todo * {
+  cursor: pointer;
+  margin-right: 0.5rem;
+  width: 100%;
+}
+#todos-list .todo i {
+  font-size: 0.9rem;
+}
+
+#todos-list .todo .bi-pen-fill {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 24px;
+  margin-right: 20px;
+  flex: 1 1 1 1 1 1;
+}
+
+#todos-list .todo .bi-list {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 24px;
+  margin-right: 20px;
+  flex: 1 1 1 1 1 1;
+}
+#todos-list .todo .bi-list:hover {
+  transform: translateY(-2px);
+}
+
+#todos-list .todo .bi-pen-fill:hover {
+  transform: translateY(-2px);
+}
+#todos-list .todo .bi-trash3-fill {
+  color: rgba(0, 0, 0, 0.8);
+  margin-right: 20px;
+  font-size: 24px;
+  flex: 1 1 1 1 1 1;
+}
+#todos-list .todo .bi-trash3-fill:hover {
+  transform: translateY(-2px);
+}
+
+#todos-list .todo .bi-calendar-event-fill {
+  color: rgba(0, 0, 0, 0.8);
+  margin-right: 0px;
+  font-size: 24px;
+  flex: 1 1 1 1 1 1;
+}
+#todos-list .todo .bi-calendar-event-fill:hover {
+  transform: translateY(-2px);
+}
+
+
+#todos-list .todo .popover {
+  display: none;
+  background-color: rgb(10, 19, 94);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(20, 20, 20, 0.3);
+}
+#todos-list .todo .popover-content {
+  font-size: 16px;
+  color: #0c0b0b;
+}
+
+.add button {
+  width: 100px;
+  padding: 10px 15px;
+  margin-left: 10px;
+  margin-top: 5px;
+  border: none;
+  font-size: 2rem;
+  outline: none;
+  background-color: transparent;
+  color: #000000;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.add button:hover{
+  transform: translateY(-2px);
+}
+.add button:active{
+  transform: translateY(0);
+}
+
+.navbar {
+  background-color: #82828a 90%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.navbar-brand {
+  font-size: 1.2rem;
+  margin-right: 20px;
+}
+
+.navbar .icons {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.navbar .icon {
+  color: #000000;
+  font-size: 2.0rem;
+  margin-left: 10px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.input-field textarea {
+  flex: 1;
+  width: 100%;
+}
+
+.text {
+  font-size: 18px;
+}
+
+.modal-footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-footer button {
+  width: 80%;
+  height: 30%;
+  padding: 10px 15px;
+  margin-left: 10px;
+  margin-top: 5px;
+  border: 1px solid gray;
+  font-size: 1.5rem;
+  border-radius: 12px;
+  outline: none;
+  background-color: transparent;
+  color: #000000;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.modal-footer:hover{
+  transform: translateY(-2px);
+}
+.modal-footer:active{
+  transform: translateY(0);
+}
+
+.popover {
+  display: none;
+  background-color: rgb(10, 19, 94);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(20, 20, 20, 0.3);
+}
+.popover-content {
+  font-size: 16px;
+  color: #0c0b0b;
+}
+
+.icons{
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.bi-pen-fill {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 24px;
+  margin-right: 20px;
+}
+
+ .bi-list {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 24px;
+  margin-right: 20px;
+  margin-left: auto;
+}
+.bi-list:hover {
+  transform: translateY(-2px);
+}
+
+.bi-pen-fill:hover {
+  transform: translateY(-2px);
+}
+.bi-trash3-fill {
+  color: rgba(0, 0, 0, 0.8);
+  margin-right: 0px;
+  font-size: 24px;
+  float: right;
+}
+.bi-trash3-fill:hover {
+  transform: translateY(-2px);
+}
+
+.icons {
+  margin-left: auto;
+}
