@@ -9,7 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ChatComponent } from './components/chat/chat.component';
-import{NgToastModule}  from 'ng-angular-popup';
+import {NgToastModule}  from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import{NgToastModule}  from 'ng-angular-popup';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgToastModule
+    NgToastModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

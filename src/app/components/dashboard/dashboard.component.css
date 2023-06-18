@@ -254,3 +254,9 @@
 .icons {
   margin-left: auto;
 }
+
+.fa-user-circle-o{
+  color: black;
+  font-size: 24px;
+  margin-right: 7px;
+}

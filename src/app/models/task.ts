@@ -5,12 +5,6 @@ export class Task {
     Status: string = 'Planned';
 }
 
-export interface User {
-    id: number;
-    name: string;
-    email: string;
-  }
-
 export interface Job{
     id: number;
     name: string;
@@ -29,4 +23,8 @@ export class JobUpdate{
 
 export class JobDelete{
     id!: number;
+}
+
+export class PasswordChange{
+    password!: string;
 }

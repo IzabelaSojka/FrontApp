@@ -57,7 +57,6 @@ export class AuthService {
   decodeToken(){
     const jwtHelper = new JwtHelperService();
     const token = this.getToken()!;
-    console.log(jwtHelper.decodeToken(token));
     return jwtHelper.decodeToken(token);
   }
 
@@ -82,8 +81,13 @@ export class AuthService {
   }
 
   getRoleFromToken(){
-    if(this.userPayload)
-    return this.userPayload.role;
+    const decodedToken = this.decodeToken();
+    if (decodedToken) {
+      const roleUser = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+      console.log('Role: ', roleUser);
+      return roleUser;
+    }
+    return null;
   }
 }
 

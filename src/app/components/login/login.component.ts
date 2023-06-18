@@ -22,7 +22,6 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private toast: NgToastService,
-    private userStore: UserStoreService,
     ){}
 
   ngOnInit(): void{
@@ -51,7 +50,6 @@ export class LoginComponent implements OnInit {
       },
       error:(err)=>{
         this.toast.error({detail:"ERROR", summary:"Wrong email or password!!"})
-        alert(err?.error.message)
       },
     });
       

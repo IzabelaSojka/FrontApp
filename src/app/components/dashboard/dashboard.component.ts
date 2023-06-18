@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Job, JobDelete, JobUpdate, Task } from 'src/app/models/task';
+import { Job, JobDelete, JobUpdate, PasswordChange, Task } from 'src/app/models/task';
 import ValidateForm from 'src/app/helpers/validateform';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
@@ -19,11 +19,13 @@ export class DashboardComponent implements OnInit {
   public taskArr : Job[] = [];
   public taskUpdate: JobUpdate = new JobUpdate();
   public taskDelete: JobDelete = new JobDelete();
+  public changePassword: PasswordChange = new PasswordChange();
   public role!:string;
 
   public editTaskValue : string = '';
   public emailaddress: string =""; 
   taskForm!:FormGroup;
+  passwordFrom!:FormGroup;
 
   constructor(
     private auth: AuthService,
@@ -41,10 +43,16 @@ export class DashboardComponent implements OnInit {
     .subscribe(res=>{
       this.taskArr = res;
     });
+
     this.taskForm = this.fb.group({
       name_task: ['', Validators.required],
       description: ['', Validators.required],
       date: ['', Validators.required]
+    });
+
+    this.passwordFrom = this.fb.group({
+      password: ['', Validators.required],
+      repeatPassword: ['', Validators.required]
     });
 
     this.userStore.getNameFromStore()
@@ -102,6 +110,21 @@ export class DashboardComponent implements OnInit {
     } 
   }
 
+  openModel3() {
+    const modelDiv = document.getElementById('myModal3');
+    if(modelDiv!= null) {
+      modelDiv.style.display = 'block';
+    } 
+  }
+
+  CloseModel3() {
+    const modelDiv = document.getElementById('myModal3');
+    this.passwordFrom.reset();
+    if(modelDiv!= null) {
+      modelDiv.style.display = 'none';
+    } 
+  }
+
   fetchUserTasks() {
       this.api.getAllTask().subscribe(
         (tasks) => {
@@ -140,8 +163,6 @@ export class DashboardComponent implements OnInit {
       });
     }
   }
-
-
 
   editTask() {
     if (this.taskForm.valid) {
@@ -186,6 +207,7 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
+
   fillForm(task: any) {
     this.taskForm.patchValue({
       name_task: task.name,
@@ -209,9 +231,41 @@ export class DashboardComponent implements OnInit {
         this.toast.success({detail:"SUCCESS", summary:"Job deleted!!", duration: 5000})
       },
       (error) => {
-        console.log('nie działa');
       }
     );
+  }
+
+  changePass() {
+    this.passwordFrom.patchValue({
+      password: this.passwordFrom.value.password,
+      repeatPassword: this.passwordFrom.value.repeatPassword,
+    });
+    if(this.passwordFrom.value.password === this.passwordFrom.value.repeatPassword){
+      this.changePassword.password = this.passwordFrom.value.password;
+      this.api.changePassword(this.changePassword).subscribe(
+      (res) => {
+        this.CloseModel3();
+        console.log('Changed password');
+        this.toast.success({detail:"SUCCESS", summary:"Changed password!", duration: 5000});
+        this.passwordFrom.reset();
+      },
+      (error) => {
+      }
+    );
+    }else{
+      this.toast.error({detail:"Error", summary:"Passwords must be the same", duration: 5000})
+    }
+    
+  }
+
+  type: string = "password";
+  isText: boolean = false;
+  eyeIcon: string = "fa-eye-slash";
+
+  hideShowPassword(){
+    this.isText = !this.isText;
+    this.isText ? this.eyeIcon = "fa-eye": this.eyeIcon = "fa-eye-slash";
+    this.isText ? this.type = "text" : this.type = "password";
   }
 
   logOut(){
@@ -222,6 +276,4 @@ export class DashboardComponent implements OnInit {
   goChat(){
     this.router.navigate(['chat']);
   }
-
-
 }

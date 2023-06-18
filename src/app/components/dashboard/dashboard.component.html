@@ -1,9 +1,9 @@
-
 <div class="outer">
     <nav class="navbar">
       <h4>Hello, {{emailaddress}}</h4>
         <div class="icons">
           <i (click)="goChat()" class="fa fa-comments icon" aria-hidden="true"></i>
+          <i (click)="openModel3()" class="fa fa-user-circle-o" aria-hidden="true"></i>
           <i (click)="logOut()" class="fa fa-sign-out icon" aria-hidden="true"></i>
         </div>
       </nav>
@@ -42,7 +42,6 @@
               <a class="bi bi-list" data-bs-toggle="collapse" [attr.href]="'#collapse-' + i" role="button" aria-expanded="false" [attr.aria-controls]="'collapse-' + i"></a>
               <i (click)="fillForm(task)" class="bi bi-pen-fill"></i>
               <i (click)="delete(task)" class="bi bi-trash3-fill"></i>
-              <i class="bi bi-calendar-event-fill"></i>
             </div>
             
           </div>
@@ -136,3 +135,35 @@
         </div>
       </div>
     </div>
+    <div class="modal" id="myModal3">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Change password</h4>
+            <button type="button" class="btn-close" (click)="CloseModel3()" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+                  <div class="panel-body p-3">
+                      <form  [formGroup]="passwordFrom">
+                          <div class="form-group pt-3">
+                              <label class="text" for="password">New password:</label>
+                              <div class="input-field" >
+                                  <input formControlName="password" [type]="type" placeholder="Password">
+                              </div>
+                          </div>
+                          <div class="form-group pt-3">
+                            <label class="text" for="repeatPassword">Repeat password:</label>
+                            <div class="input-field" >
+                                <input formControlName="password" [type]="type" placeholder="Password">
+                            </div>
+                        </div>
+                      </form>
+                  </div>
+          </div>
+          <div class="modal-footer">
+              <button (click)="changePass()" type="submit">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
