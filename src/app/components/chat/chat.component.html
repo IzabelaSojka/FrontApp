@@ -1,24 +1,24 @@
 <div class="outer">
-    <nav class="navbar">
-        <div class="icons">
-          <i (click)="return()" class="fa fa-arrow-left icon" aria-hidden="true"></i>
-        </div>
-      </nav>
-    <div class="container">
+  <nav class="navbar">
+    <div class="icons">
+      <h4>Hello, {{ nameIdentidier }}</h4>
+      <i (click)="return()" class="fa fa-arrow-left icon" aria-hidden="true"></i>
+    </div>
+  </nav>
+  <div class="container">
+    <div>
+      <button *ngIf="nameIdentidier === 1" (click)="getAdminChat()">Get Admin Chat</button>
+    </div>
     <div class="chat">
       <div class="chat-messages">
-        <div class="message">
-          <div class="message-text">Hello!</div>
-          <div class="message-time">10:00 AM</div>
+        <div *ngIf="messages.length > 0">
+          <h2>Chat Messages:</h2>
+          <ul>
+            <li *ngFor="let message of messages">{{ message }}</li>
+          </ul>
         </div>
-        <div class="message">
-          <div class="message-text">Hi there!</div>
-          <div class="message-time">10:05 AM</div>
-        </div>
-      </div>
-      <div class="chat-input">
-        <input type="text" placeholder="Type your message">
-        <button class="btn btn-primary">Send</button>
+        <input type="text" [(ngModel)]="currentMessage" placeholder="Enter message" />
+        <button (click)="sendMessage()">Send</button>
       </div>
     </div>
   </div>

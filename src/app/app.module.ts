@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ChatComponent } from './components/chat/chat.component';
 import {NgToastModule}  from 'ng-angular-popup';
+import { FormsModule } from '@angular/forms';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 
 @NgModule({
   declarations: [
@@ -25,8 +27,14 @@ import {NgToastModule}  from 'ng-angular-popup';
     ReactiveFormsModule,
     HttpClientModule,
     NgToastModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HubConnection,
+      useFactory: () => new HubConnectionBuilder().withUrl('ws://0.0.0.0:5004/api/chat').build()
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
