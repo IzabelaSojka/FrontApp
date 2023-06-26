@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserStoreService } from 'src/app/services/user.store.service';
 import * as signalR from '@microsoft/signalr';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
+import { ChatMessage} from 'src/app/models/task';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -18,6 +19,9 @@ export class ChatComponent implements OnInit{
   public chatConnection!: signalR.HubConnection;
   public messages: string[] = [];
   public currentMessage: string = '';
+  public chatId: string = '';
+  public senderId: number[] = [];
+
 
   constructor(
     private router: Router,
@@ -33,33 +37,46 @@ export class ChatComponent implements OnInit{
       this.nameIdentidier = val || nameIdentifierFromToken
     });
     this.hubConnection = new HubConnectionBuilder()
-      .withUrl('ws://0.0.0.0:5004/api/chat') // Adres URL do Huba na serwerze
+      .withUrl('/api/chat', signalR.HttpTransportType.ServerSentEvents) // Adres URL do Huba na serwerze
+      .configureLogging(signalR.LogLevel.Debug)
       .build();
 
-    this.hubConnection.on('ReceiveMessage', (message: string) => {
-      this.messages.push(message);
+    this.hubConnection.on('Tomek', (message: string) => {
+      const chatMessage: ChatMessage  = JSON.parse(message);
+      this.messages.push(chatMessage.Content);
+      this.chatId = chatMessage.ChatId;
+      this.senderId.push(chatMessage.SenderId);
+      console.log(message)
     });
 
     this.hubConnection.start()
       .then(() => {
         console.log('Connection started');
-        this.getAdminChat();
       })
       .catch(err => console.error('Error while starting connection: ' + err));
+
   }
 
   sendMessage(): void {
     if (this.currentMessage) {
-      this.hubConnection.invoke('SendMessage', 1, this.currentMessage, null)
+      this.hubConnection.invoke('SendMessage', JSON.parse(this.nameIdentidier.toString()), this.currentMessage, this.chatId)
         .catch(err => console.error('Error while sending message: ' + err));
       this.currentMessage = '';
     }
   }
 
+  registerToQueue():void{
+    this.hubConnection.invoke('RegisterToQueue', JSON.parse(this.nameIdentidier.toString()), "test")
+    .then((response: any)=>{
+      console.log(response);
+    })
+    .catch(err => console.error('Error while getting chat: ' + err));
+  }
+
   getAdminChat(): void {
-    this.hubConnection.invoke('GetAdminChat', 1)
+    this.hubConnection.invoke('GetAdminChat', JSON.parse(this.nameIdentidier.toString()))
     .then((response: any) => {
-      const chatId = response.chatId;
+      const chatId = response.chatid;
       const messages = response.messages;
 
       // Wyświetlanie otrzymanych wiadomości

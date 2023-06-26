@@ -28,3 +28,10 @@ export class JobDelete{
 export class PasswordChange{
     password!: string;
 }
+
+export interface ChatMessage{
+    SenderId: number;
+    Content: string;
+    ChatId: string;
+}
+

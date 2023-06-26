@@ -11,7 +11,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow-y: scroll;
-    background-color: #1d1f20;
+    background-color: #e4eef3;
   }
   
   .chat-messages {
@@ -74,4 +74,12 @@
     margin-left: 10px;
     margin-right: 20px;
     cursor: pointer;
+  }
+
+  .right-align {
+    text-align: right;
+  }
+  
+  .left-align {
+    text-align: left;
   }
