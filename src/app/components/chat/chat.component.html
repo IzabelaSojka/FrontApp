@@ -5,20 +5,27 @@
     </div>
   </nav>
   <div class="container">
-    <div>
+    
+    <div class="chat">
+      <div class="chat-buttons">
       <button *ngIf="nameIdentidier == 1" (click)="getAdminChat()">Get Admin Chat</button>
       <button *ngIf="nameIdentidier != 1" (click)="registerToQueue()">Chat</button>
     </div>
-    <div class="chat">
+      <h2>Chat Messages:</h2>
       <div class="chat-messages">
-        <h2>Chat Messages:</h2>
         <div *ngIf="messages.length > 0">
           <ul>
-            <li *ngFor="let message of messages; let i = index" [ngClass]="{ 'right-align': senderId[i] == nameIdentidier, 'left-align': senderId[i] != nameIdentidier }">
-              {{ message }}
+            <li *ngFor="let message of messages; let i = index" >
+              <div class="message-container">
+                <div [ngClass]="{ 'message-content': true, 'right': senderId[i] == nameIdentidier }">
+                  {{ message }}
+                </div>
+              </div>
             </li>
           </ul>
         </div>
+      </div>
+      <div class="chat-input">
         <input type="text" [(ngModel)]="currentMessage" placeholder="Enter message" />
         <button (click)="sendMessage()">Send</button>
       </div>

@@ -76,20 +76,9 @@ export class ChatComponent implements OnInit{
   getAdminChat(): void {
     this.hubConnection.invoke('GetAdminChat', JSON.parse(this.nameIdentidier.toString()))
     .then((response: any) => {
+      this.messages = [];
       const chatId = response.chatid;
-      const messages = response.messages;
 
-      // Wyświetlanie otrzymanych wiadomości
-      if (messages && messages.length > 0) {
-        for (const message of messages) {
-          this.messages.push(message.content);
-        }
-      } else {
-        // Obsługa braku wiadomości
-        this.messages.push('No new messages');
-      }
-
-      // Dołączanie do grupy czatu
       if (chatId) {
         this.hubConnection.invoke('JoinChatGroup', chatId)
           .catch(err => console.error('Error while joining chat group: ' + err));
@@ -101,4 +90,5 @@ export class ChatComponent implements OnInit{
   return() {
     this.router.navigate(['dashboard']);
   }
+
 }

@@ -6,16 +6,17 @@
   }
   
   .chat {
-    width: 50%;
-    height: 500px;
-    border: 1px solid #ccc;
+    width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f0f0f0;
     border-radius: 5px;
-    overflow-y: scroll;
-    background-color: #e4eef3;
   }
   
   .chat-messages {
-    padding: 10px;
+    height: 300px;
+    overflow-y: scroll;
+    padding-bottom: 10px;
   }
   
   .message {
@@ -26,11 +27,6 @@
     background-color: #f2f2f2;
     padding: 5px 10px;
     border-radius: 5px;
-  }
-  
-  .message-time {
-    font-size: 12px;
-    color: #777;
   }
   
   .chat-input {
@@ -76,10 +72,102 @@
     cursor: pointer;
   }
 
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    margin-bottom: 10px;
+  }
+  
+  .message-container {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .message-content {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .message-content.right {
+    background-color: #698be9;
+    color: #fff;
+  }
+  
+  .message-sender {
+    margin-left: 10px;
+    font-size: 12px;
+    color: #888;
+  }
+  
   .right-align {
-    text-align: right;
+    background-color: #899bcc;
   }
   
   .left-align {
     text-align: left;
+  }
+
+  .message-right {
+    text-align: right;
+    /* Dodaj inne style dotyczące wiadomości po prawej stronie */
+  }
+
+  .chat-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
+  
+  .chat-input input[type="text"] {
+    flex: 1;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .chat-input button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #698be9;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .chat-input button:hover {
+    background-color: #576dbf;
+  }
+  
+  .chat-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .chat-buttons button {
+    margin: 0 5px;
+    padding: 5px 20px; /* Zwiększono padding, aby przycisk był dłuższy */
+    font-size: 16px;
+    background-color: #698be9;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 200%; /* Ustawiono szerokość na 200% dla dwukrotnie większego przycisku */
+  }
+  
+  .chat-buttons button:hover {
+    background-color: #576dbf;
   }
