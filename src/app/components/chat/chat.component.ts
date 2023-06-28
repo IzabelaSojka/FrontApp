@@ -35,6 +35,12 @@ export class ChatComponent implements OnInit{
     .subscribe(val=>{
       const nameIdentifierFromToken = this.auth.getNameIdentifierFromToken();
       this.nameIdentidier = val || nameIdentifierFromToken
+     
+    });
+    this.userStore.getRoleFromStore()
+    .subscribe(val=>{
+      const roleFromToken = this.auth.getRoleFromToken();
+      this.role = val || roleFromToken
     });
     this.hubConnection = new HubConnectionBuilder()
       .withUrl('/api/chat', signalR.HttpTransportType.ServerSentEvents) // Adres URL do Huba na serwerze

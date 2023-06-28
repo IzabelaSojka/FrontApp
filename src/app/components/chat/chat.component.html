@@ -8,8 +8,8 @@
     
     <div class="chat">
       <div class="chat-buttons">
-      <button *ngIf="nameIdentidier == 1" (click)="getAdminChat()">Get Admin Chat</button>
-      <button *ngIf="nameIdentidier != 1" (click)="registerToQueue()">Chat</button>
+      <button *ngIf="role == 'Admin'" (click)="getAdminChat()">Get Admin Chat</button>
+      <button *ngIf="role != 'Admin'" (click)="registerToQueue()">Chat</button>
     </div>
       <h2>Chat Messages:</h2>
       <div class="chat-messages">
