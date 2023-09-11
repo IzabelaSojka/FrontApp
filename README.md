@@ -1,5 +1,6 @@
 # FrontApp
 
+This project is the frontend for the https://github.com/Bogdan00766/TIM_TDL
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.3.
 
 ## Development server
